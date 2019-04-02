@@ -1,0 +1,27 @@
+{
+  "name": "cosmos-hub",
+  "version": "1.0.0",
+  "description": "- [ ] GUI should be responsive and work well for recent versions of mobile and PC web browsers - [ ] `index.js` shows a list of the most recent ten blocks along with when they were created (table, list, dates) - [ ] `index.js` includes an interactive form that lets the user input a number and search for a particular block. IF the block exists, it should redirect them to a block details view. - [ ] There should be a block details view that let users view the information for a specific block - [ ] unit tests for the block explorer",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lovincyrus/cosmos-hub.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lovincyrus/cosmos-hub/issues"
+  },
+  "homepage": "https://github.com/lovincyrus/cosmos-hub#readme",
+  "dependencies": {
+    "next": "^8.0.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
