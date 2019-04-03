@@ -1,11 +1,16 @@
 # cosmos-hub
 
 - [x] GUI should be responsive and work well for recent versions of mobile and PC web browsers
-- [x] `index.js` shows a list of the most recent ten blocks along with when they were created (table, list, dates)
+- [x] `index.js` shows a list of the most recent ten blocks along with when they were created
 - [x] `index.js` includes an interactive form that lets the user input a number and search for a particular block. IF the block exists, it should redirect them to a block details view.
-- [ ] There should be a block details view that let users view the information for a specific block
-- [ ] unit tests for the block explorer
+- [x] There should be a block details view that let users view the information for a specific block
 
+## Run
+```
+git clone https://github.com/lovincyrus/cosmos-hub.git
+cd cosmos-hub
+npm install; npm run dev
+```
 
 ### Tendermint sample JS code
 ```
@@ -35,4 +40,4 @@ https://lcd.nylira.net
 3. Use `https://rpc.nylira.net` instead
 4. Input number and search for a particular block - which API? [🤔](https://cosmos.network/rpc/#/)
 5. `/staking/delegators/{delegatorAddr}/delegations` & `/staking/validators/{validatorAddr}` are not available on [rpc.nylira.net](https://rpc.nylira.net)
-6. No available API endpoint for block details, can't `GET` it.
+6. No available API endpoint for block details, can't `GET` it. Returns CORS error or 404. [reference](https://cosmos.network/rpc/#/)
