@@ -9,7 +9,7 @@
 ```
 git clone https://github.com/lovincyrus/cosmos-hub.git
 cd cosmos-hub
-npm install; npm run dev
+yarn; yarn dev
 ```
 
 ### Tendermint sample JS code
@@ -41,3 +41,6 @@ https://lcd.nylira.net
 4. Input number and search for a particular block - which API? [🤔](https://cosmos.network/rpc/#/)
 5. `/staking/delegators/{delegatorAddr}/delegations` & `/staking/validators/{validatorAddr}` are not available on [rpc.nylira.net](https://rpc.nylira.net)
 6. No available API endpoint for block details, can't `GET` it. Returns CORS error or 404. [reference](https://cosmos.network/rpc/#/)
+7. ModuleNotFoundError: Module not found: Error: Can't resolve 'fs' [https://github.com/zeit/next.js/issues/2734](https://github.com/zeit/next.js/issues/2734)
+8. Found `fs` error fix here: [https://github.com/zeit/next.js/issues/4305#issuecomment-387679511](https://github.com/zeit/next.js/issues/4305#issuecomment-387679511)
+9. Reason being: [https://github.com/zeit/next.js/issues/2734#issuecomment-321151325](https://github.com/zeit/next.js/issues/2734#issuecomment-321151325)

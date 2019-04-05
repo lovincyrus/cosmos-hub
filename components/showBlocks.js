@@ -1,14 +1,12 @@
 import React from 'react'
-import axios from 'axios'
 import _ from 'lodash'
+import { RpcClient } from 'tendermint'
 
 class ShowBlocks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      blocks: {},
-      isLoading: true,
-      informationOfBlock: ""
+      isLoading: true
     };
   }
 
@@ -18,31 +16,21 @@ class ShowBlocks extends React.Component {
   }
 
   getBlocksList() {
-    const status = response => {
-      if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response)
-      }
-      return Promise.reject(new Error(response.statusText))
-    }
+    const client = RpcClient("wss://rpc.nylira.net:443");
 
-    axios.get(`https://rpc.nylira.net/block?height=10`)
-      .then(status)
-      .then(res => {
-        this.setState({
-          isLoading: false,
-          blocks: res.data
-        })
+    client.subscribe({ query: "tm.event = 'NewBlock'" }, event => {
+      this.setState({
+        isLoading: false,
+        data: event.block
       })
-      .catch(error => {
-        console.log('Request failed', error)
-      })
+    })
   }
 
   render() {
-    const { blocks } = this.state;
-    // console.log(blocks)
+    const { data } = this.state;
+    console.log(data)
 
-    const getNestedObj = _.get(blocks, ['result', 'block', 'header'])
+    // const getNestedObj = _.get(blocks, ['result', 'block', 'header'])
     // console.log(getNestedObj)
 
     const loadingState = (
@@ -54,7 +42,7 @@ class ShowBlocks extends React.Component {
     return (
       <React.Fragment>
         {this.state.isLoading && loadingState}
-        <code>{JSON.stringify(getNestedObj)}</code>
+        <code>{JSON.stringify(data)}</code>
       </React.Fragment>
     );
   }
