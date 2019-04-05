@@ -23,16 +23,12 @@ client.subscribe({ query: "tm.event = 'NewBlock'" }, event => {
 })
 ```
 
-### More endpoints with flexible CORS policy
-```
-https://rpc.nylira.net
-wss://rpc.nylira.net:443
+## Example Blockchain Explorers
 
-https://lcd.nylira.net
-```
-
-### Available endpoints
-`https://cosmos.network/rpc/#/`
+* [Cosmos Overview](https://cosmos-overview.genesislab.net)
+* [Hubble](https://hubble.figment.network)
+* [Cosmos Visualizer](https://nylira.net/3d)
+* [Stargazer](https://stargazer.certus.one)
 
 ### Notes
 1. Can't access `https://rpc.cosmos.network:26657`, it has been blocked by CORS. CORS are not enabled from the requested source. [https://imgur.com/a/WxFXjok](https://imgur.com/a/WxFXjok)
