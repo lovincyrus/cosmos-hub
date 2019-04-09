@@ -1,6 +1,6 @@
 module.exports = {
   target: 'serverless',
-  webpack: function (config, { isServer }) {
+  webpack: function(config) {
     config.node = {
       fs: 'empty'
     }

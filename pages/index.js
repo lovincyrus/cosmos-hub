@@ -6,7 +6,6 @@ export default function Home() {
     <React.Fragment>
       <h1>Cosmos Hub Blockchain</h1>
       <ShowBlocks />
-      <CheckBlocks />
 
       <style jsx global>
       {`
