@@ -82,11 +82,11 @@ class ShowBlocks extends React.Component {
         </style>
         <style jsx global>
           {`
-          p.loading-indicator {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+            p.loading-indicator {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
           `}
         </style>
       </React.Fragment>

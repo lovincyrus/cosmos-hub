@@ -56,16 +56,15 @@ class CheckBlocks extends React.Component {
 
     const showModal = (
       <Modal open={open} onClose={this.onCloseModal} center>
-        <h2>Block</h2>
+        <h2>Block {block.height}</h2>
         <p>chain id: <code>{block.chain_id}</code></p>
-        <p>height: <code>{block.height}</code></p>
         <p>app hash: <code>{block.app_hash}</code></p>
         <p>consensus hash: <code>{block.consensus_hash}</code></p>
         <p>data hash: <code>{block.data_hash}</code></p>
         <p>evidence hash: <code>{block.evidence_hash}</code></p>
         <p>last commit hash: <code>{block.last_commit_hash}</code></p>
         <p>last results hash: <code>{block.last_results_hash}</code></p>
-        <p>next validaotrs hash: <code>{block.next_validators_hash}</code></p>
+        <p>next validators hash: <code>{block.next_validators_hash}</code></p>
         <p>num txs: <code>{block.num_txs}</code></p>
         <p>proposer address: <code>{block.proposer_address}</code></p>
         <p>time: <code>{moment(block.time).format("YYYY-MM-DD h:mm:ss A")}</code></p>
@@ -111,6 +110,7 @@ class CheckBlocks extends React.Component {
           flex: 1 0 auto;
           line-height: 1.4;
           margin: 0;
+          width: 100px;
         }
 
         button {

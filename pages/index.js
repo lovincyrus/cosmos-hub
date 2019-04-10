@@ -23,6 +23,12 @@ export default function Home() {
           justify-content: center;
           align-items: center;
         }
+
+        @media (max-width: 400px) {
+          h1 {
+            font-size: 1.7em;
+          }
+        }
       `}
       </style>
     </React.Fragment>
