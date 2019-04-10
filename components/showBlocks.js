@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import moment from 'moment'
 import { RpcClient } from 'tendermint'
 
@@ -13,7 +12,7 @@ class ShowBlocks extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchBlock();
     this.setState({ isLoading: true })
   }
@@ -33,12 +32,10 @@ class ShowBlocks extends React.Component {
   render() {
     const { data, precommits } = this.state;
     // console.log(data)
-    console.log(precommits)
+    // console.log(precommits)
 
+    // get top 10 blocks
     const truncated = precommits.slice(0, 10);
-
-    const getChainId = _.get(data, ['header', 'chain_id'])
-
     const loadingState = (
       <div>
         <p>Loading...</p>
@@ -48,35 +45,37 @@ class ShowBlocks extends React.Component {
     return (
       <React.Fragment>
         {this.state.isLoading && loadingState}
-        <code>{getChainId}</code>
         <br />
         <br />
         <table>
-          <tr>
-            <th>Height</th>
-            <th>Proposer</th>
-            <th>Time</th>
-          </tr>
-        {truncated.map(item =>
-          <tr>
-            <td>{item.height}</td>
-            <td>{item.validator_address}</td>
-            <td>{moment(item.timestamp).format("YYYY-MM-DD h:mm:ss A")}</td>
-          </tr>
-        )}
+          <thead>
+            <tr>
+              <th>Height</th>
+              <th>Proposer</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+          {truncated.map((item, index) =>
+              <tr key={index}>
+                <td>{item.height}</td>
+                <td>{item.validator_address}</td>
+                <td>{moment(item.timestamp).format("YYYY-MM-DD h:mm:ss A")}</td>
+              </tr>
+          )}
+          </tbody>
         </table>
 
       <style jsx>
       {`
         table {
-          font-family: arial, sans-serif;
           border-collapse: collapse;
           width: 100%;
         }
 
         td, th {
           border: 1px solid #dddddd;
-          text-align: left;
+          text-align: center;
           padding: 8px;
         }
       `}

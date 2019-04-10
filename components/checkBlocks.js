@@ -5,9 +5,11 @@ class CheckBlocks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      informationOfBlock: '',
-      address: null,
-      blockDetails: ''
+      height: '',
+      results: '',
+      query: '',
+      block_meta: '',
+      block: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,23 +17,28 @@ class CheckBlocks extends React.Component {
 
   handleInputChange(event) {
     const value = event.target.value;
-    this.setState({ informationOfBlock: value });
+    this.setState({ query: value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('A bech32 encoded address has been submitted: ' + this.state.informationOfBlock);
+    console.log(`A block height of ${this.state.query} has been submitted`)
 
-    // TODO: https://cosmos.network/rpc/#/ICS1/get_auth_accounts__address_
-    // Refer to Note #5
-    axios.get(`https://rpc.nylira.net/auth/accounts`, {
+    // Query for a particular block
+    // https://rpc.nylira.net/block?height=1337
+    axios.get(`https://rpc.nylira.net/block`, {
       params: {
-        address: this.state.informationOfBlock
+        height: this.state.query
       }})
       .then(res => {
         this.setState({
-          blockDetails: res.data
+          results: res.data,
+          block: res.data.result.block,
+          block_meta: res.data.result.block_meta
         })
+        console.log(this.state.results)
+        console.log(this.state.block)
+        console.log(this.state.block_meta)
       })
       .catch(err => console.log(`Error: ${err}`))
   }
@@ -43,16 +50,60 @@ class CheckBlocks extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               <br />
-              Check block: {" "}
+              Enter block height: {" "}
               <input
-                name="informationOfBlock"
+                name="query"
                 type="text"
-                value={this.state.informationOfBlock}
-                onChange={this.handleInputChange} />
+                placeholder="1337"
+                value={this.state.query}
+                onChange={this.handleInputChange}
+              />
+              {" "}
+              <button type="submit" value="Submit">Submit</button>
             </label>
-            <input type="submit" value="Submit" />
+
           </form>
         </div>
+
+      <style jsx>
+      {`
+        form {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        input {
+          background: #fff;
+          font-size: 15px;
+          padding: 5px;
+          border: 1px solid #e3e3e3;
+          flex: 1 0 auto;
+          line-height: 1.4;
+          margin: 0;
+        }
+
+        button {
+          border-radius: 4px;
+          font-size: 16px;
+          font-weight: 500;
+          white-space: nowrap;
+          word-break: keep-all;
+          cursor: pointer;
+          line-height: 1;
+          position: relative;
+          text-align: center;
+          padding: 8px 16px;
+          margin-left: 10px;
+          opacity: 1;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+          border: 1px solid #5064fb;
+          color: #FFF;
+          background-color: #5064fb;
+          text-shadow: 0 1px 1px rgba(0,0,0,0.08);
+        }
+      `}
+      </style>
       </React.Fragment>
     );
   }

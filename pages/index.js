@@ -5,12 +5,23 @@ export default function Home() {
   return (
     <React.Fragment>
       <h1>Cosmos Hub Blockchain</h1>
+      <CheckBlocks />
       <ShowBlocks />
 
       <style jsx global>
       {`
-        h1 {
+        *, html {
           font-family: Helvetica,Calibri,Arial,sans-serif;
+          background-color: #fafafa;
+        }
+
+        h1 {
+          font-weight: 700;
+          color: #333;
+          font-size: 2.4em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       `}
       </style>
