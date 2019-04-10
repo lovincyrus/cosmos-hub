@@ -4,7 +4,7 @@ import CheckBlocks from '../components/checkBlocks'
 export default function Home() { 
   return (
     <React.Fragment>
-      <h1>Cosmos Hub Blockchain</h1>
+      <h1>Cosmos Block Explorer</h1>
       <CheckBlocks />
       <ShowBlocks />
 
@@ -26,7 +26,7 @@ export default function Home() {
 
         @media (max-width: 400px) {
           h1 {
-            font-size: 1.7em;
+            font-size: 1.6em;
           }
         }
       `}

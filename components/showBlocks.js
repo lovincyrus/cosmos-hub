@@ -36,6 +36,7 @@ class ShowBlocks extends React.Component {
 
     // get top 10 blocks
     const truncated = precommits.slice(0, 10);
+
     const loadingState = (
       <div>
         <p className="loading-indicator">Loading...</p>
