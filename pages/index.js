@@ -10,7 +10,7 @@ export default function Home() {
 
       <style jsx global>
       {`
-        *, html {
+        html {
           font-family: Helvetica,Calibri,Arial,sans-serif;
           background-color: #fafafa;
         }

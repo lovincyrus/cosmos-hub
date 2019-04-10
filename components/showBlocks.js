@@ -38,7 +38,7 @@ class ShowBlocks extends React.Component {
     const truncated = precommits.slice(0, 10);
     const loadingState = (
       <div>
-        <p>Loading...</p>
+        <p className="loading-indicator">Loading...</p>
       </div>
     );
 
@@ -57,29 +57,38 @@ class ShowBlocks extends React.Component {
           </thead>
           <tbody>
           {truncated.map((item, index) =>
-              <tr key={index}>
-                <td>{item.height}</td>
-                <td>{item.validator_address}</td>
-                <td>{moment(item.timestamp).format("YYYY-MM-DD h:mm:ss A")}</td>
-              </tr>
+            <tr key={index}>
+              <td>{item.height}</td>
+              <td>{item.validator_address}</td>
+              <td>{moment(item.timestamp).format("YYYY-MM-DD h:mm:ss A")}</td>
+            </tr>
           )}
           </tbody>
         </table>
 
-      <style jsx>
-      {`
-        table {
-          border-collapse: collapse;
-          width: 100%;
-        }
+        <style jsx>
+        {`
+          table {
+            border-collapse: collapse;
+            width: 100%;
+          }
 
-        td, th {
-          border: 1px solid #dddddd;
-          text-align: center;
-          padding: 8px;
-        }
-      `}
-      </style>
+          td, th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+          }
+        `}
+        </style>
+        <style jsx global>
+          {`
+          p.loading-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          `}
+        </style>
       </React.Fragment>
     );
   }

@@ -1,26 +1,29 @@
 import React from 'react'
 import axios from 'axios'
+import moment from 'moment'
+import Modal from 'react-responsive-modal'
 
 class CheckBlocks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: '',
       results: '',
       query: '',
-      block_meta: '',
-      block: ''
+      block: '',
+      open: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onOpenModal = this.onOpenModal.bind(this);
+    this.onCloseModal = this.onCloseModal.bind(this);
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const value = event.target.value;
     this.setState({ query: value });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     console.log(`A block height of ${this.state.query} has been submitted`)
 
@@ -33,17 +36,44 @@ class CheckBlocks extends React.Component {
       .then(res => {
         this.setState({
           results: res.data,
-          block: res.data.result.block,
-          block_meta: res.data.result.block_meta
+          block: res.data.result.block.header
         })
-        console.log(this.state.results)
         console.log(this.state.block)
-        console.log(this.state.block_meta)
       })
       .catch(err => console.log(`Error: ${err}`))
   }
 
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+
   render() {
+    const { open, block } = this.state;
+
+    const showModal = (
+      <Modal open={open} onClose={this.onCloseModal} center>
+        <h2>Block</h2>
+        <p>chain id: <code>{block.chain_id}</code></p>
+        <p>height: <code>{block.height}</code></p>
+        <p>app hash: <code>{block.app_hash}</code></p>
+        <p>consensus hash: <code>{block.consensus_hash}</code></p>
+        <p>data hash: <code>{block.data_hash}</code></p>
+        <p>evidence hash: <code>{block.evidence_hash}</code></p>
+        <p>last commit hash: <code>{block.last_commit_hash}</code></p>
+        <p>last results hash: <code>{block.last_results_hash}</code></p>
+        <p>next validaotrs hash: <code>{block.next_validators_hash}</code></p>
+        <p>num txs: <code>{block.num_txs}</code></p>
+        <p>proposer address: <code>{block.proposer_address}</code></p>
+        <p>time: <code>{moment(block.time).format("YYYY-MM-DD h:mm:ss A")}</code></p>
+        <p>total txs: <code>{block.total_txs}</code></p>
+        <p>validators hash: <code>{block.validators_hash}</code></p>
+      </Modal>
+    );
+
     return (
       <React.Fragment>
         <div>
@@ -59,11 +89,11 @@ class CheckBlocks extends React.Component {
                 onChange={this.handleInputChange}
               />
               {" "}
-              <button type="submit" value="Submit">Submit</button>
+              <button type="submit" value="Submit" onClick={this.onOpenModal}>Submit</button>
             </label>
-
           </form>
         </div>
+        {showModal}
 
       <style jsx>
       {`
